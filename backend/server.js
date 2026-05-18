@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const db = require("./db");
+const js = require("@eslint/js");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -318,20 +319,25 @@ app.put("/admin/approve-product/:id", (req, res) => {
 /* ===================== CHAT ===================== */
 
 app.get("/chat/:productId/:userId", (req, res) => {
-  const { productId, userId } = req.params;
+  const { productId } = req.params;
 
   const sql = `
     SELECT * FROM messages
     WHERE product_id = ?
-    AND (sender_id = ? OR receiver_id = ?)
     ORDER BY id ASC
   `;
+  
 
-  db.query(sql, [productId, userId, userId], (err, rows) => {
-    if (err) return res.status(500).json({ error: "Failed to fetch messages" });
+  db.query(sql, [productId], (err, rows) => {
+    if (err) {
+      console.error("Error fetching messages:", err.message);
+      return res.status(500).json({ error: "Failed to fetch messages" });
+    }
+
     res.json(rows);
   });
 });
+
 
 app.post("/chat", (req, res) => {
   const { product_id, sender_id, sender_name, receiver_id, message } = req.body;
