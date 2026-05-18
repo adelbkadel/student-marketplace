@@ -13,12 +13,10 @@ function Products({ products }) {
     const term = searchTerm.toLowerCase();
 
     const matchesSearch =
-      product.name?.toLowerCase().includes(term) ||
-      product.category?.toLowerCase().includes(term);
-
+    product.name?.toLowerCase().includes(term) ||
+    product.category?.toLowerCase().includes(term);
     const matchesCategory =
-      selectedCategory === "" || product.category === selectedCategory;
-
+     selectedCategory === "" || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 

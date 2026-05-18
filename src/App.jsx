@@ -18,6 +18,8 @@ import AdminDashboard from "./components/AdminDashboard";
 import Chat from "./components/Chat";
 import Conversations from "./components/Conversations";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function App() {
   const [products, setProducts] = useState([]);
   const currentUser = JSON.parse(localStorage.getItem("user"));
@@ -28,11 +30,13 @@ function App() {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/products");
+      const res = await axios.get(`${API_URL}/products`);
+
       const formattedProducts = res.data.map((product) => ({
         ...product,
         images: Array.isArray(product.images) ? product.images : [],
       }));
+
       setProducts(formattedProducts);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -41,7 +45,7 @@ function App() {
 
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/products/${id}`);
+      await axios.delete(`${API_URL}/products/${id}`);
       fetchProducts();
     } catch (error) {
       console.error("Error deleting product:", error);
@@ -52,18 +56,22 @@ function App() {
     <Router>
       <div className="app-shell">
         <Navbar />
+
         <main className="app-main">
           <Routes>
             <Route path="/" element={<Products products={products} />} />
             <Route path="/products" element={<Products products={products} />} />
+
             <Route
               path="/products/:id"
               element={<ProductDetails products={products} />}
             />
+
             <Route
               path="/add-product"
               element={currentUser ? <AddProduct /> : <Navigate to="/login" />}
             />
+
             <Route
               path="/my-listings"
               element={
@@ -74,25 +82,30 @@ function App() {
                 )
               }
             />
+
             <Route
               path="/edit/:id"
               element={currentUser ? <EditProduct /> : <Navigate to="/login" />}
             />
+
             <Route
               path="/admin"
               element={currentUser ? <AdminDashboard /> : <Navigate to="/login" />}
             />
+
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/about" element={<About />} />
             <Route path="/categories" element={<CategoriesPage />} />
             <Route path="/chat/:id" element={<Chat />} />
+
             <Route
-  path="/conversations"
-  element={currentUser ? <Conversations /> : <Navigate to="/login" />}
-/>
+              path="/conversations"
+              element={currentUser ? <Conversations /> : <Navigate to="/login" />}
+            />
           </Routes>
         </main>
+
         <Footer />
       </div>
     </Router>
