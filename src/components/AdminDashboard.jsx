@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import "../styles/AdminDashboard.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function AdminDashboard() {
 const currentUser = JSON.parse(localStorage.getItem("user"));
@@ -16,7 +17,7 @@ const [loadingProducts, setLoadingProducts] = useState(true);
 
 const fetchPendingUsers = async () => {
 try {
-const res = await fetch("http://localhost:5000/admin/pending-users");
+const res = await fetch(`${API_URL}/admin/pending-users`);
 const data = await res.json();
 setPendingUsers(Array.isArray(data) ? data : []);
 } catch (error) {
@@ -29,7 +30,7 @@ setLoadingPending(false);
 
 const fetchAllUsers = async () => {
 try {
-const res = await fetch("http://localhost:5000/admin/all-users");
+const res = await fetch(`${API_URL}/admin/all-users`);
 const data = await res.json();
 setAllUsers(Array.isArray(data) ? data : []);
 } catch (error) {
@@ -42,7 +43,7 @@ setLoadingAllUsers(false);
 
 const fetchAllProducts = async () => {
 try {
-const res = await fetch("http://localhost:5000/admin/all-products");
+const res = await fetch(`${API_URL}/admin/all-products`);
 const data = await res.json();
 setAllProducts(Array.isArray(data) ? data : []);
 } catch (error) {
@@ -55,7 +56,7 @@ setLoadingProducts(false);
 
 const approveUser = async (id) => {
 try {
-const res = await fetch(`http://localhost:5000/admin/approve-user/${id}`, {
+const res = await fetch(`${API_URL}/admin/approve-user/${id}`, {
 method: "PUT",
 });
 
@@ -81,7 +82,7 @@ const confirmDelete = window.confirm(
 if (!confirmDelete) return;
 
 try {
-const res = await fetch(`http://localhost:5000/admin/delete-user/${id}`, {
+const res = await fetch(`${API_URL}/admin/delete-user/${id}`, {
 method: "DELETE",
 });
 
@@ -108,7 +109,7 @@ if (!confirmDelete) return;
 
 try {
 const res = await fetch(
-`http://localhost:5000/admin/delete-product/${id}`,
+`${API_URL}/admin/delete-product/${id}`,
 {
 method: "DELETE",
 }

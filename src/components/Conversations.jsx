@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import "../styles/Conversations.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Conversations() {
   const currentUser = JSON.parse(localStorage.getItem("user"));
@@ -10,7 +11,7 @@ function Conversations() {
   const fetchConversations = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/conversations/${currentUser.id}`
+        `${API_URL}/conversations/${currentUser.id}`
       );
       const data = await res.json();
       setConversations(Array.isArray(data) ? data : []);

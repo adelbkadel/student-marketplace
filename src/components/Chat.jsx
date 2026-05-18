@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import "../styles/Chat.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Chat() {
   const { id } = useParams();
@@ -22,9 +23,8 @@ function Chat() {
 
   const fetchMessages = async () => {
     try {
-      const res = await fetch(
-        `http://localhost:5000/chat/${id}/${currentUser.id}`
-      );
+      const res = await fetch(`${API_URL}/chat/${id}/${currentUser.id}`);
+      
       const data = await res.json();
       setMessages(Array.isArray(data) ? data : []);
     } catch (error) {
@@ -37,7 +37,7 @@ function Chat() {
 
   const fetchProductInfo = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/product/${id}`);
+      const res = await fetch(`${API_URL}/product/${id}`);
       const data = await res.json();
 
       if (res.ok) {
@@ -76,7 +76,7 @@ function Chat() {
     if (!newMessage.trim()) return;
 
     try {
-      const res = await fetch("http://localhost:5000/chat", {
+      const res = await fetch(`${API_URL}/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

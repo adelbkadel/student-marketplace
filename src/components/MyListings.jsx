@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import "../styles/MyListings.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function MyListings({ deleteProduct }) {
   const currentUser = JSON.parse(localStorage.getItem("user"));
@@ -13,7 +14,7 @@ function MyListings({ deleteProduct }) {
     const fetchMyProducts = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/my-products/${currentUser.id}`
+          `${API_URL}/my-products/${currentUser.id}`
         );
         const data = await res.json();
 

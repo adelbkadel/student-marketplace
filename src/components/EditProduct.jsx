@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Navigate } from "react-router-dom";
 import "../styles/EditProduct.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function EditProduct() {
   const { id } = useParams();
@@ -21,7 +22,7 @@ function EditProduct() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/product/${id}`);
+        const res = await fetch(`${API_URL}/product/${id}`);
         const data = await res.json();
 
         if (!res.ok) {
@@ -95,7 +96,7 @@ function EditProduct() {
     e.preventDefault();
 
     try {
-      const res = await fetch(`http://localhost:5000/products/${id}`, {
+      const res = await fetch(`${API_URL}/products/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

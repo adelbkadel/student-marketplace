@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "../styles/ProductDetails.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function ProductDetails() {
   const { id } = useParams();
@@ -11,7 +12,7 @@ function ProductDetails() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/product/${id}`);
+        const res = await fetch(`${API_URL}/product/${id}`);
         const data = await res.json();
 
         if (!res.ok) {
