@@ -3,9 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/Auth.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Login() {
   const navigate = useNavigate();
-
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,7 +19,7 @@ function Login() {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/login", {
+      const res = await axios.post(`${API_URL}/login`, {
         studentId,
         password,
       });
