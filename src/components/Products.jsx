@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Hero from "./Hero";
 import "../styles/Products.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Products({ products }) {
   const navigate = useNavigate();
