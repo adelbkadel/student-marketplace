@@ -1,0 +1,137 @@
+.hero {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 110px 20px 90px;
+  overflow: hidden;
+
+  /* الصورة الكبيرة */
+  background-image:
+    linear-gradient(rgba(10, 10, 15, 0.45), rgba(10, 10, 15, 0.58)),
+    url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* parallax خفيف */
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.05), transparent 28%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1050px;
+  text-align: center;
+}
+
+.hero-label {
+  display: inline-block;
+  margin-bottom: 22px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.hero-content h1 {
+  font-size: 78px;
+  line-height: 0.98;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 24px;
+  letter-spacing: -2px;
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.hero-text {
+  max-width: 760px;
+  margin: 0 auto 34px;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.8;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero-primary-btn,
+.hero-secondary-btn {
+  padding: 15px 26px;
+  border-radius: 999px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.25s ease;
+}
+
+.hero-primary-btn {
+  background-color: #ffffff;
+  color: #111111;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.hero-secondary-btn {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.hero-primary-btn:hover,
+.hero-secondary-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+@media (max-width: 992px) {
+  .hero {
+    min-height: 78vh;
+    padding: 90px 18px 70px;
+    background-attachment: scroll;
+  }
+
+  .hero-content h1 {
+    font-size: 56px;
+  }
+
+  .hero-text {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-content h1 {
+    font-size: 42px;
+    letter-spacing: -1px;
+  }
+
+  .hero-text {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .hero-primary-btn,
+  .hero-secondary-btn {
+    width: 100%;
+    max-width: 260px;
+  }
+}
