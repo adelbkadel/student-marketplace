@@ -4,6 +4,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import "../styles/Auth.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Register() {
   const navigate = useNavigate();
 
@@ -28,13 +30,17 @@ function Register() {
     if (!form.lastName.trim()) return toast.error("Last name is required");
     if (!form.studentId.trim()) return toast.error("Student ID is required");
     if (!form.password.trim()) return toast.error("Password is required");
-    if (form.password.length < 4)
+
+    if (form.password.length < 4) {
       return toast.error("Password must be at least 4 characters");
-    if (form.password !== form.confirmPassword)
+    }
+
+    if (form.password !== form.confirmPassword) {
       return toast.error("Passwords do not match");
+    }
 
     try {
-      await axios.post("http://localhost:5000/register", {
+      await axios.post(`${API_URL}/register`, {
         firstName: form.firstName,
         lastName: form.lastName,
         studentId: form.studentId,
