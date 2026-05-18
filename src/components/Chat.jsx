@@ -76,6 +76,12 @@ function Chat() {
     if (!newMessage.trim()) return;
 
     try {
+
+      const actualReceiverId =
+  Number(currentUser.id) === Number(receiverId)
+    ? messages.find((m) => Number(m.sender_id) !== Number(currentUser.id))?.sender_id
+    : receiverId;
+
       const res = await fetch(`${API_URL}/chat`, {
         method: "POST",
         headers: {
@@ -85,7 +91,7 @@ function Chat() {
           product_id: Number(id),
           sender_id: currentUser.id,
           sender_name: `${currentUser.first_name} ${currentUser.last_name}`,
-          receiver_id: receiverId,
+          receiver_id: actualReceiverId,
           message: newMessage,
         }),
       });
