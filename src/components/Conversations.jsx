@@ -10,10 +10,9 @@ function Conversations() {
 
   const fetchConversations = async () => {
     try {
-      const res = await fetch(
-        `${API_URL}/conversations/${currentUser.id}`
-      );
+const res = await fetch(`${API_URL}/conversations/${currentUser.id}`);
       const data = await res.json();
+      
       setConversations(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error("Error fetching conversations:", error);
