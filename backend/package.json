@@ -2,6 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "server.js",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "start": "node server.js"
   },
@@ -10,6 +13,6 @@
     "express": "^5.2.1",
     "multer": "^2.1.1",
     "mysql2": "^3.20.0",
-    "sqlite3": "^6.0.1"
+    "sqlite3": "5.1.7"
   }
 }
